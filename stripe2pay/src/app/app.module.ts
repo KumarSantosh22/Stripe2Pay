@@ -5,6 +5,8 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StripePaymentInterceptor } from './interceptors/stripe-payment.interceptor';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,13 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     NgxStripeModule.forRoot(environment.stripe.publicKey)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: StripePaymentInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

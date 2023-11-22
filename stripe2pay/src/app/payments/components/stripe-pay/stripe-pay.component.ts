@@ -21,11 +21,8 @@ export class StripePayComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log('k', environment.stripe.publicKey);
-
     this.stripePromise = loadStripe(environment.stripe.publicKey);
     this.stripePromise.then((d:any) => console.log('ddd', d));
-
   }
 
 
@@ -34,12 +31,14 @@ export class StripePayComponent implements OnInit {
 
     // When the customer clicks on the button, redirect them to Checkout.
     const stripe = await this.stripePromise;
+
     const { error } = await stripe!.redirectToCheckout({
       mode: 'payment',
       lineItems: [{ price: this.priceId, quantity: this.quantity }],
       successUrl: `${window.location.href}success`,
       cancelUrl: `${window.location.href}failure`,
     });
+
     // If `redirectToCheckout` fails due to a browser or network
     // error, display the localized error message to your customer
     // using `error.message`.
