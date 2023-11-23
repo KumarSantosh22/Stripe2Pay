@@ -21,14 +21,15 @@ export class StripePayComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.stripePromise = loadStripe(environment.stripe.publicKey);
+    this.stripePromise = loadStripe(environment.stripe.publicKey, {
+      apiVersion: '2023-10-16'
+    });
+
     this.stripePromise.then((d:any) => console.log('ddd', d));
   }
 
-
   async checkout() {
     // Call your backend to create the Checkout session.
-
     // When the customer clicks on the button, redirect them to Checkout.
     const stripe = await this.stripePromise;
 

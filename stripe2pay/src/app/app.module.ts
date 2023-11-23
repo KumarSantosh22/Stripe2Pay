@@ -5,8 +5,10 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StripePaymentInterceptor } from './interceptors/stripe-payment.interceptor';
+
+import { provideNgxStripe } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { StripePaymentInterceptor } from './interceptors/stripe-payment.intercep
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgxStripeModule.forRoot(environment.stripe.publicKey)
   ],
   providers: [
@@ -22,7 +25,8 @@ import { StripePaymentInterceptor } from './interceptors/stripe-payment.intercep
       provide: HTTP_INTERCEPTORS,
       useClass: StripePaymentInterceptor,
       multi: true
-    }
+    },
+    provideNgxStripe(environment.stripe.publicKey)
   ],
   bootstrap: [AppComponent]
 })

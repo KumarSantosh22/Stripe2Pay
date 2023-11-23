@@ -7,20 +7,36 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuccessComponent } from './components/success/success.component';
 import { FailureComponent } from './components/failure/failure.component';
 import { PlugnpayComponent } from './components/plugnpay/plugnpay.component';
+import { StripePaymentComponent } from './components/stripe-payment/stripe-payment.component';
 
+
+import {
+  StripeCardComponent,
+  StripeCardGroupDirective,
+  StripeCardNumberComponent,
+  StripeCardExpiryComponent,
+  StripeCardCvcComponent
+} from 'ngx-stripe'
 
 @NgModule({
   declarations: [
     StripePayComponent,
     SuccessComponent,
     FailureComponent,
-    PlugnpayComponent
+    PlugnpayComponent,
+    StripePaymentComponent
   ],
   imports: [
     CommonModule,
     PaymentsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StripeCardComponent,
+    StripeCardNumberComponent,
+    StripeCardExpiryComponent,
+    StripeCardCvcComponent,
+    StripeCardGroupDirective
+
   ]
 })
 export class PaymentsModule { }
