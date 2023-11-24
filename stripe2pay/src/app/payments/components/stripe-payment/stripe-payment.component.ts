@@ -46,7 +46,7 @@ export class StripePaymentComponent {
     private http: HttpClient,
     private fb: FormBuilder,
     private stripeService: StripeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.stripeTest = this.fb.group({
@@ -56,13 +56,13 @@ export class StripePaymentComponent {
   }
 
   pay(): void {
-    alert(this.stripeTest.valid);
+    // alert(this.stripeTest.valid);
     console.log(this.stripeTest)
     if (this.stripeTest.valid) {
       this.createPaymentIntent(this.stripeTest.get('amount')?.value)
         .pipe(
           switchMap((pi) =>
-            this.stripeService.confirmCardPayment(pi.client_secret || env.stripe.secretKey, {
+            this.stripeService.confirmCardPayment(pi.client_secret || '', {
               payment_method: {
                 card: this.card.element,
                 billing_details: {
@@ -91,7 +91,7 @@ export class StripePaymentComponent {
 
   createPaymentIntent(amount: number): Observable<PaymentIntent> {
     return this.http.post<PaymentIntent>(
-      `${env.apiUrl}/create-payment-intent`,
+      `${env.apiUrl}/Stripes/CreatePaymentIntent`,
       { amount }
     );
   }

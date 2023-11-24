@@ -19,7 +19,7 @@ export class StripePaymentInterceptor implements HttpInterceptor {
   // }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    alert();
+    // alert('interceptor');
     return next.handle(req).pipe(map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
             event = event.clone({body: this.modifyBody(event.body)});
