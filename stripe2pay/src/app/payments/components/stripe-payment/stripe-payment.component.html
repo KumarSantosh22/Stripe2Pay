@@ -1,13 +1,37 @@
-<div
-  ngxStripeCardGroup
-  [formGroup]="stripeTest"
->
-  <input formControlName="name" />
-  <input formControlName="amount" />
-  <ngx-stripe-card-number ></ngx-stripe-card-number>
-  <ngx-stripe-card-expiry ></ngx-stripe-card-expiry>
-  <ngx-stripe-card-cvc ></ngx-stripe-card-cvc>
-  <button type="submit" (click)="pay()">
-    PAY
-  </button>
+<div class="container">
+  <div ngxStripeCardGroup [formGroup]="stripeTest">
+    <div class="row">
+      <div class="col-6">
+        <input class="form-control" formControlName="name" />
+      </div>
+      <div class="col-6">
+        <input class="form-control" formControlName="amount" />
+      </div>
+    </div>
+
+    <div class="card p-3">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-control">
+            <ngx-stripe-card-number></ngx-stripe-card-number>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="form-control">
+            <ngx-stripe-card-expiry></ngx-stripe-card-expiry>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-control">
+            <ngx-stripe-card-cvc></ngx-stripe-card-cvc>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-2  text-end">
+      <button class="btn btn-outline-primary" type="submit" (click)="pay()">PAY</button>
+    </div>
+  </div>
+
 </div>
